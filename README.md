@@ -1,32 +1,105 @@
-# _Sample project_
+# 🌡️ ESP32-C3 SuperMini — BLE + DS18B20 + Web Bluetooth Dashboard
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+Проект демонстрирует использование **ESP32-C3** в роли BLE-периферийного устройства,  
+которое передаёт данные с датчика температуры **DS18B20** через BLE-уведомления (Notify).  
+Для отображения данных используется современный **веб-интерфейс (Web Bluetooth)**,  
+работающий прямо в браузере (Chrome / Edge / Opera).
 
-This is the simplest buildable example. The example is used by command `idf.py create-project`
-that copies the project to user specified path and set it's name. For more information follow the [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project)
+---
 
+## 🔧 Аппаратная часть
 
+| Компонент | Подключение | Примечание |
+|------------|--------------|-------------|
+| **ESP32-C3 SuperMini** | — | Микроконтроллер с BLE |
+| **DS18B20** | DQ → GPIO10 | Обязательно внешний pull-up 4.7 kΩ к 3.3 V |
+| | Vdd → 3.3 V, GND → GND | |
+| **Кнопка** | К GND → GPIO9 | Встроенный pull-up включён |
+| **LED (встроенный)** | GPIO8 | Активный низкий уровень (0 = горит) |
 
-## How to use example
-We encourage the users to use the example as a template for the new projects.
-A recommended way is to follow the instructions on a [docs page](https://docs.espressif.com/projects/esp-idf/en/latest/api-guides/build-system.html#start-a-new-project).
+---
 
-## Example folder contents
+## 🧠 Программная часть
 
-The project **sample_project** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+- Среда: **ESP-IDF v5.5.1**  
+- Стек BLE: **NimBLE (встроенный в ESP-IDF)**  
+- Основные возможности:
+  - Передача `temp=XX.X` через BLE Notify каждую секунду  
+  - При нажатии кнопки → Notify `btn=1`  
+  - Управление LED через BLE Write (`'1'`/`'0'`)  
+  - Поддержка Web Bluetooth — управление и график температуры прямо в браузере  
 
-ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt`
-files that provide set of directives and instructions describing the project's source files and targets
-(executable, library, or both). 
+---
 
-Below is short explanation of remaining files in the project folder.
+## 💻 Веб-интерфейс
+
+HTML-страница `index.html` (см. папку `web/`):
+
+- Подключается к устройству `ESP32C3-BLE`  
+- Отображает поток уведомлений `temp=XX.X` на графике  
+- Показывает события (`btn=1`, `alarm=1`, `limit=...`) как вертикальные цветные маркеры  
+- Считает усреднённые значения за каждые 10 минут и часовое среднее  
+
+### Совместимые браузеры
+| Поддерживается | Примечание |
+|----------------|-------------|
+| 🟢 **Google Chrome** | на Windows, Linux, Android |
+| 🟢 **Microsoft Edge** | на Windows |
+| 🟡 **Opera / Chromium-браузеры** | поддержка BLE зависит от версии |
+
+> ⚠️ Web Bluetooth работает **только через HTTPS или `http://localhost`**.
+
+---
+
+## 📦 Компиляция и прошивка
+
+1. Установить **ESP-IDF v5.5.1**  
+2. Открыть проект в **VS Code / Espressif-IDE**  
+3. Настроить порт (например, `COM31`)  
+4. Сборка и прошивка:
+   ```bash
+   idf.py build flash monitor
+   ```
+
+---
+
+## 📈 Пример работы
+
+- В логе ESP32:
+  ```
+  I (1234) BLE_MIN: ADV STARTED
+  I (2345) BLE_MIN: CONNECTED
+  I (3456) BLE_MIN: NOTIFY: temp=23.5
+  I (4567) BLE_MIN: NOTIFY: btn=1
+  ```
+
+- В браузере — реальный график температуры с отметками событий:
+
+  ![Web Bluetooth graph example](docs/example_graph.png)
+
+---
+
+## 📘 Структура проекта
 
 ```
-├── CMakeLists.txt
-├── main
-│   ├── CMakeLists.txt
-│   └── main.c
-└── README.md                  This is the file you are currently reading
+ESP32-C3_BLE_Temp/
+ ├── main/
+ │   ├── main.c              # основной код ESP-IDF
+ │   └── CMakeLists.txt
+ ├── web/
+ │   └── index.html          # Web Bluetooth интерфейс
+ ├── sdkconfig
+ ├── README.md
+ └── .gitignore
 ```
-Additionally, the sample project contains Makefile and component.mk files, used for the legacy Make based build system. 
-They are not used or needed when building with CMake and idf.py.
+
+---
+
+## 📄 Лицензия
+Проект распространяется под лицензией MIT.  
+Можно использовать и модифицировать свободно с указанием автора.
+
+---
+
+© 2025 — Jevgenijs Ricko  
+[GitHub Profile](https://github.com/JevgenijsRicko)
