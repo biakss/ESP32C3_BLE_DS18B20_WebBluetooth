@@ -25,6 +25,6 @@
   "git.confirmSync": false,
   "git.autofetch": true,
 
-  // 🚫 Отключить предложения об установке Dev Containers - 
+  // 🚫 Отключить предложения об установке Dev Containers - принудительно!
   "dev.containers.installRecommendedExtensions": false
 }
