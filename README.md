@@ -2,7 +2,12 @@
 
 ![Repo Type](https://img.shields.io/badge/repo-private-blue)
 ![Platform](https://img.shields.io/badge/platform-ESP32--C3-orange)
+![ESP-IDF](https://img.shields.io/badge/ESP--IDF-v5.5.1-blue)
+![BLE Stack](https://img.shields.io/badge/BLE-NimBLE-success)
+![Sensor](https://img.shields.io/badge/Sensor-DS18B20-lightgrey)
+![Web Bluetooth](https://img.shields.io/badge/Web%20Bluetooth-Ready-blueviolet)
 ![Status](https://img.shields.io/badge/status-online-success)
+![Build](https://img.shields.io/badge/build-passing-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 Проект демонстрирует использование **ESP32-C3** в роли BLE-периферийного устройства,  
