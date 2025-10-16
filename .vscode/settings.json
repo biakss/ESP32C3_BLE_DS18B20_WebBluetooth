@@ -1,0 +1,30 @@
+{
+  // Автосохранение файлов
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 2500,
+
+  // Автоматический commit + push при сохранении любого файла
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": ".*",
+        "cmd": "git add . && git commit -m \"Auto commit from VS Code\" && git push"
+      }
+    ]
+  },
+
+  // Опционально: скрываем папки сборки и бинарники из просмотра
+  "files.exclude": {
+    "build": true,
+    ".git": true,
+    ".vscode": false
+  },
+
+  // Улучшенный лог терминала
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+
+  // 🚫 Отключить предложения об установке Dev Containers
+  "dev.containers.installRecommendedExtensions": false
+}
