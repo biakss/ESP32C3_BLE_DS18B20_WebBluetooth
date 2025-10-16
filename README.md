@@ -1,5 +1,10 @@
 # 🌡️ ESP32-C3 SuperMini — BLE + DS18B20 + Web Bluetooth Dashboard
 
+![Repo Type](https://img.shields.io/badge/repo-private-blue)
+![Platform](https://img.shields.io/badge/platform-ESP32--C3-orange)
+![Status](https://img.shields.io/badge/status-online-success)
+![License](https://img.shields.io/badge/license-MIT-green)
+
 Проект демонстрирует использование **ESP32-C3** в роли BLE-периферийного устройства,  
 которое передаёт данные с датчика температуры **DS18B20** через BLE-уведомления (Notify).  
 Для отображения данных используется современный **веб-интерфейс (Web Bluetooth)**,  
