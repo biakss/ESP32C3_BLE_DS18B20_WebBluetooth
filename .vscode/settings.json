@@ -1,21 +1,27 @@
 {
-  "C_Cpp.intelliSenseEngine": "default",
-  "idf.espIdfPathWin": "C:\\Users\\User\\esp\\v5.5.1\\esp-idf",
-  "idf.pythonInstallPath": "C:\\Users\\User\\.espressif\\tools\\idf-python\\3.11.2\\python.exe",
-  "idf.openOcdConfigs": [
-    "board/esp32c3-builtin.cfg"
-  ],
-  "idf.portWin": "COM31",
-  "idf.toolsPathWin": "C:\\Users\\User\\.espressif",
-  "idf.customExtraVars": {
-    "IDF_TARGET": "esp32c3"
+  // Автосохранение файлов
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 2500,
+
+  // Автоматический commit + push при сохранении любого файла
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "match": ".*",
+        "cmd": "git add . && git commit -m \"Auto commit from VS Code\" && git push"
+      }
+    ]
   },
-  "clangd.path": "C:\\Users\\User\\.espressif\\tools\\esp-clang\\esp-19.1.2_20250312\\esp-clang\\bin\\clangd.exe",
-  "clangd.arguments": [
-    "--background-index",
-    "--query-driver=C:\\Users\\User\\.espressif\\tools\\riscv32-esp-elf\\esp-14.2.0_20241119\\riscv32-esp-elf\\bin\\riscv32-esp-elf-gcc.exe",
-    "--compile-commands-dir=${workspaceFolder}\\build"
-  ],
-  "idf.flashType": "UART",
-  "idf.monitorPort": "COM31"
+
+  // Опционально: скрываем папки сборки и бинарники из просмотра
+  "files.exclude": {
+    "build": true,
+    ".git": true,
+    ".vscode": false
+  },
+
+  // Улучшенный лог терминала
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true
 }
